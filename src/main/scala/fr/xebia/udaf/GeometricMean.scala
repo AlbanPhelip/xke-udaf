@@ -23,16 +23,16 @@ class GeometricMean extends UserDefinedAggregateFunction {
   }
 
   override def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
-    buffer(0) = buffer.getAs[Long](0) + 1
-    buffer(1) = buffer.getAs[Double](1) * input.getAs[Double](0)
+    buffer(0) = buffer.getLong(0) + 1
+    buffer(1) = buffer.getDouble(1) * input.getDouble(0)
   }
 
   override def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = {
-    buffer1(0) = buffer1.getAs[Long](0) + buffer2.getAs[Long](0)
-    buffer1(1) = buffer1.getAs[Double](1) * buffer2.getAs[Double](1)
+    buffer1(0) = buffer1.getLong(0) + buffer2.getLong(0)
+    buffer1(1) = buffer1.getDouble(1) * buffer2.getDouble(1)
   }
 
   override def evaluate(buffer: Row): Any = {
-    scala.math.pow(buffer.getAs[Double](1), 1d / buffer.getAs[Long](0))
+    scala.math.pow(buffer.getDouble(1), 1d / buffer.getLong(0))
   }
 }
