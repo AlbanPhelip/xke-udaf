@@ -37,10 +37,11 @@ class StandardDeviation extends UserDefinedAggregateFunction {
   }
 
   override def evaluate(buffer: Row): Any = {
-    val n = buffer.getLong(0)
+    val n = buffer.getLong(0).toDouble
     val sum = buffer.getDouble(1)
+    val squaredSum = buffer.getDouble(2)
     val mean = sum / n
 
-    sqrt((1d / (n - 1)) * (buffer.getDouble(2) - 2 * mean * sum + n * pow(mean, 2)))
+    sqrt((1 / (n - 1)) * squaredSum - (n / (n - 1)) * pow(mean, 2))
   }
 }
