@@ -1,8 +1,9 @@
-package fr.xebia.udaf
+package fr.xebia.udaf.exercice3
 
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
 import org.apache.spark.sql.types._
+
 import scala.math._
 
 class StandardDeviation extends UserDefinedAggregateFunction {

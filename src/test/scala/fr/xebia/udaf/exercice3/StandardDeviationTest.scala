@@ -1,8 +1,8 @@
-package fr.xebia.udaf
+package fr.xebia.udaf.exercice3
 
-import org.apache.spark.sql.DataFrame
+import fr.xebia.udaf.SparkUtils
+import org.apache.spark.sql.{DataFrame, functions}
 import org.scalatest.{FlatSpec, Matchers}
-import org.apache.spark.sql.functions
 
 class StandardDeviationTest extends FlatSpec with Matchers with SparkUtils {
 

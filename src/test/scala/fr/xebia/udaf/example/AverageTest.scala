@@ -1,5 +1,6 @@
-package fr.xebia.udaf
+package fr.xebia.udaf.example
 
+import fr.xebia.udaf.SparkUtils
 import org.apache.spark.sql.{DataFrame, Row}
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -14,12 +15,12 @@ class AverageTest extends FlatSpec with Matchers with SparkUtils {
       ("a", 4d),
       ("b", 1d),
       ("b", 3d)
-    ).toDF("col_str", "col_int")
+    ).toDF("col_str", "col_double")
 
     val averageUdaf = new Average()
 
     // When
-    val result = df.groupBy("col_str").agg(averageUdaf($"col_int").as("avg")).collect
+    val result = df.groupBy("col_str").agg(averageUdaf($"col_double").as("avg")).collect
 
     // Then
     result should contain theSameElementsAs Array(

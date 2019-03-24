@@ -6,7 +6,7 @@ trait SparkUtils {
 
   val spark: SparkSession = SparkSession
     .builder()
-    .appName("toto")
+    .appName("UDAF XKE")
     .master("local[*]")
     .getOrCreate()
 
