@@ -2,9 +2,26 @@
 
 ## Les UDAFs en Spark
 
+Les UserDefinedAggregateFunctions permettent d'implémenter vos propres fonctions d'agrégation. Elles n'existent que dans les APIs Java et Scala.
+
+#### L'implémentation
+Pour définir une UDAF vous devez créer une classe qui étend la classe abstraite `UserDefinedAggregateFunction` du package `org.apache.spark.sql.expressions`. Elle implémente 8 méthodes : 
+ - `inputSchema` : Schéma des données d'entrées
+ - `bufferSchema` : Schéma des données intermédiaires
+ - `dataType` : Type des données de sorties
+ - `deterministic` : Booléen à `true` si les données de sortie sont toujours les mêmes pour un dataset donné
+ - `initialize` : Initialisation des buffers d'agrégation
+ - `update` : Mise à jour des buffers d'agrégation
+ - `merge` : Merge des buffers d'agrégation
+ - `evaluate` : Génération du résultat final
+ 
+#### Illustration
+![Alt text](images/udaf.png)
+
+
 ## Les exercices
 
-Les exercices sont dans le package `fr.xebia.udaf`. Il y a ensuite un package par exercice. Pour chaque UDAF les 8 méthodes sont pré-écrites. Vous n'avez plus qu'à les implémenter.
+Les exercices sont dans le package `fr.xebia.udaf`. Il y a ensuite un package par exercice. Pour chaque UDAF les 8 méthodes sont pré-écrites. Vous n'avez plus qu'à les implémenter. Les solutions se trouvent sur la branche `solution`.
 
 #### Exemple - Moyenne
 Dans le package `example` vous avez un exemple de l'implémentation du calcul d'une moyenne avec une UDAF. 
