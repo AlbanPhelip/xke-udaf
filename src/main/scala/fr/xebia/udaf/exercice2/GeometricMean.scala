@@ -6,33 +6,20 @@ import org.apache.spark.sql.types._
 
 class GeometricMean extends UserDefinedAggregateFunction {
 
-  override def inputSchema: StructType = StructType(StructField("value", DoubleType) :: Nil)
+  override def inputSchema: StructType = ???
 
-  override def bufferSchema: StructType = StructType(
-    StructField("count", LongType) ::
-      StructField("product", DoubleType) :: Nil
-  )
+  override def bufferSchema: StructType = ???
 
-  override def dataType: DataType = DoubleType
+  override def dataType: DataType = ???
 
-  override def deterministic: Boolean = true
+  override def deterministic: Boolean = ???
 
-  override def initialize(buffer: MutableAggregationBuffer): Unit = {
-    buffer(0) = 0l
-    buffer(1) = 1d
-  }
+  override def initialize(buffer: MutableAggregationBuffer): Unit = ???
 
-  override def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
-    buffer(0) = buffer.getLong(0) + 1
-    buffer(1) = buffer.getDouble(1) * input.getDouble(0)
-  }
+  override def update(buffer: MutableAggregationBuffer, input: Row): Unit = ???
 
-  override def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = {
-    buffer1(0) = buffer1.getLong(0) + buffer2.getLong(0)
-    buffer1(1) = buffer1.getDouble(1) * buffer2.getDouble(1)
-  }
+  override def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = ???
 
-  override def evaluate(buffer: Row): Any = {
-    scala.math.pow(buffer.getDouble(1), 1d / buffer.getLong(0))
-  }
+  override def evaluate(buffer: Row): Any = ???
+
 }
