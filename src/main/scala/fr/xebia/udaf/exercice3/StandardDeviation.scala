@@ -4,45 +4,22 @@ import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
 import org.apache.spark.sql.types._
 
-import scala.math._
-
 class StandardDeviation extends UserDefinedAggregateFunction {
-  override def inputSchema: StructType = StructType(StructField("value", DoubleType) :: Nil)
 
-  override def bufferSchema: StructType =  StructType(
-    StructField("count", LongType) ::
-      StructField("sum", DoubleType) ::
-      StructField("squared_sum", DoubleType) :: Nil
-  )
+  override def inputSchema: StructType = ???
 
-  override def dataType: DataType = DoubleType
+  override def bufferSchema: StructType =  ???
 
-  override def deterministic: Boolean = true
+  override def dataType: DataType = ???
 
-  override def initialize(buffer: MutableAggregationBuffer): Unit = {
-    buffer(0) = 0l
-    buffer(1) = 0d
-    buffer(2) = 0d
-  }
+  override def deterministic: Boolean = ???
 
-  override def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
-    buffer(0) = buffer.getLong(0) + 1
-    buffer(1) = buffer.getDouble(1) + input.getDouble(0)
-    buffer(2) = buffer.getDouble(2) + pow(input.getDouble(0), 2)
-  }
+  override def initialize(buffer: MutableAggregationBuffer): Unit = ???
 
-  override def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = {
-    buffer1(0) = buffer1.getLong(0) + buffer2.getLong(0)
-    buffer1(1) = buffer1.getDouble(1) + buffer2.getDouble(1)
-    buffer1(2) = buffer1.getDouble(2) + buffer2.getDouble(2)
-  }
+  override def update(buffer: MutableAggregationBuffer, input: Row): Unit = ???
 
-  override def evaluate(buffer: Row): Any = {
-    val n = buffer.getLong(0).toDouble
-    val sum = buffer.getDouble(1)
-    val squaredSum = buffer.getDouble(2)
-    val mean = sum / n
+  override def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = ???
 
-    sqrt((1 / (n - 1)) * squaredSum - (n / (n - 1)) * pow(mean, 2))
-  }
+  override def evaluate(buffer: Row): Any = ???
+
 }
