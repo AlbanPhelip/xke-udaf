@@ -20,7 +20,7 @@ class StandardDeviationTest extends FlatSpec with Matchers with SparkUtils {
     result.first.getDouble(0) shouldBe 1.5811388300841898
   }
 
-  "Standard deviation" should "be NaN when there is only one element" in {
+  it should "be NaN when there is only one element" in {
     // Given
     val df: DataFrame = List(1).toDF("col")
     val standardDeviationUdaf = new StandardDeviation()
